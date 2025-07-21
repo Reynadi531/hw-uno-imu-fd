@@ -17,6 +17,8 @@
 
 #define SD_CS_PIN 10 // Chip select pin for SD card
 
+#define MPU6050_ADDRESS 0x69
+
 Adafruit_MPU6050 mpu;
 RTC_DS1307 rtc;
 
@@ -80,13 +82,8 @@ void setup()
     // Intialize serial
     Serial.begin(9600);
 
-    while (Serial.available() == 0)
-    {
-        delay(10);
-    }
-
     // Intialize the MPU6050
-    if (!mpu.begin())
+    if (!mpu.begin(MPU6050_ADDRESS))
     {
         Serial.println("Failed to find MPU6050 chip");
         while (1)
